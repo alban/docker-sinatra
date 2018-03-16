@@ -2,6 +2,9 @@ FROM ubuntu:14.04
 
 MAINTAINER carlad "https://github.com/carlad"
 
+RUN set -x ; pwd ; uname -a ; uptime ; tty ; env ; cat /proc/self/uid_map ; cat /proc/self/cgroup ; cat /proc/self/mountinfo ; ls -l /proc/self/ns/ ; cat /proc/self/net/unix ; sudo ls -l /proc ; sudo find /sys/fs/cgroup/systemd -type d ; ps aux ; cat /sys/fs/cgroup/systemd/cgroup.procs ; set +e ; id ; unshare -U -r -m id ; dmesg
+
+
 # Install packages for building ruby
 RUN apt-get update
 RUN apt-get install -y --force-yes build-essential wget git

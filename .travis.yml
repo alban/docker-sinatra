@@ -6,7 +6,26 @@ services:
   - docker
 
 before_install:
-- docker pull carlad/sinatra
+- pwd
+- uname -a
+- uptime
+- tty
+- ls -la /var/run/docker.sock || true
+- env
+- cat /proc/self/uid_map || true
+- cat /proc/self/cgroup
+- cat /proc/self/mountinfo
+- ls -l /proc/self/ns/
+- cat /proc/self/net/unix
+- sudo ls -l /proc
+- sudo find /sys/fs/cgroup/systemd -type d
+- ps aux
+- cat /sys/fs/cgroup/systemd/cgroup.procs
+- id
+- dmesg
+
+- docker build -t carlad/sinatra .
+#- docker pull carlad/sinatra
 - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
 - docker ps -a
 - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
